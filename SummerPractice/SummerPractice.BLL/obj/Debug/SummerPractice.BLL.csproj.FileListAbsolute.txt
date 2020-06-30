@@ -1,0 +1,11 @@
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\bin\Debug\SummerPractice.BLL.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\bin\Debug\SummerPractice.BLL.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\bin\Debug\SummerPractice.DAL.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\bin\Debug\SummerPractice.Entities.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\bin\Debug\SummerPractice.DAL.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\bin\Debug\SummerPractice.Entities.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\obj\Debug\SummerPractice.BLL.csprojAssemblyReference.cache
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\obj\Debug\SummerPractice.BLL.csproj.CoreCompileInputs.cache
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\obj\Debug\SummerPractice.BLL.csproj.CopyComplete
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\obj\Debug\SummerPractice.BLL.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.BLL\obj\Debug\SummerPractice.BLL.pdb
