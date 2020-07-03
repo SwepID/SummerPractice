@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SummerPractice.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace SummerPractice.DAL
 {
     interface IUserBase
     {
+        string CreateUser(User user);
     }
 }

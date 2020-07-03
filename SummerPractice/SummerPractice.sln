@@ -19,6 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerPractice.DAL", "Summe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerPractice.Entities", "SummerPractice.Entities\SummerPractice.Entities.csproj", "{FF0C376B-F952-42C1-B8E0-CB82467FB3A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerPractice.PL", "SummerPractice.PL\SummerPractice.PL.csproj", "{11025DCC-E65E-4211-89DE-58EA0EA54EA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database creation script", "Database creation script", "{8FBCBEDD-5A31-4F52-8A0C-4A559B476E0A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Desktop\UserSkills.sql = ..\..\..\..\Desktop\UserSkills.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +48,10 @@ Global
 		{FF0C376B-F952-42C1-B8E0-CB82467FB3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0C376B-F952-42C1-B8E0-CB82467FB3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF0C376B-F952-42C1-B8E0-CB82467FB3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11025DCC-E65E-4211-89DE-58EA0EA54EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11025DCC-E65E-4211-89DE-58EA0EA54EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11025DCC-E65E-4211-89DE-58EA0EA54EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11025DCC-E65E-4211-89DE-58EA0EA54EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +61,7 @@ Global
 		{A6C825C7-B9DF-49B7-80D4-E9140A5F5A8B} = {E366DE3B-B512-4136-8DDE-8DE7F7C9AB01}
 		{564B99E7-6600-4B5E-8F4E-5ABCE8B3DED9} = {CCA12BCE-F909-4135-BCDF-C2A580DD7B20}
 		{FF0C376B-F952-42C1-B8E0-CB82467FB3A6} = {D4AE5998-A1A7-4A28-8999-C9FC3F62A82F}
+		{11025DCC-E65E-4211-89DE-58EA0EA54EA2} = {3C98801D-D07C-4C44-9BA4-D36590A5B056}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F25A4B59-5481-459B-A14A-64B6A4C51CC1}

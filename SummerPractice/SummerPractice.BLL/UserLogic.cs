@@ -1,4 +1,5 @@
-﻿using SummerPractice.Entities;
+﻿using SummerPractice.DAL;
+using SummerPractice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,25 +8,12 @@ using System.Threading.Tasks;
 
 namespace SummerPractice.BLL
 {
-    class UserLogic : IUserLogic
+    public class UserLogic : IUserLogic
     {
-        public string CreateUser(string login, string password)
+        UserBase userBase = new UserBase();
+        public string CreateUser(User user)
         {
-            throw new NotImplementedException();
-        }
-
-        public string DeleteUser(string login)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAllUsers()
-        {
-            throw new NotImplementedException();
-        }
-        public string AddSkillToUser(string skillName, string login)
-        {
-            throw new NotImplementedException();
+            return userBase.CreateUser(user);
         }
     }
 }

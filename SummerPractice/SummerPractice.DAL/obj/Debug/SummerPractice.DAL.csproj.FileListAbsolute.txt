@@ -7,3 +7,4 @@ C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.DAL\obj
 C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.DAL\obj\Debug\SummerPractice.DAL.csproj.CopyComplete
 C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.DAL\obj\Debug\SummerPractice.DAL.dll
 C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.DAL\obj\Debug\SummerPractice.DAL.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.DAL\bin\Debug\SummerPractice.DAL.dll.config

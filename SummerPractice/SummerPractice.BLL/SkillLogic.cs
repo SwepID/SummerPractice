@@ -7,37 +7,37 @@ using System.Threading.Tasks;
 
 namespace SummerPractice.BLL
 {
-    class SkillLogic : ISkillLogic
+    public class SkillLogic : ISkillLogic
     {
         SummerPractice.DAL.SkillBase skillBase = new DAL.SkillBase();
-        public string AddSkill(string skillName, string description)
+        public string AddSkill(Skill skill)
         {
-            throw new NotImplementedException();
+            return skillBase.AddSkill(skill);
         }
 
-        public string DeleteSkill(string skillName)
+        public string RemoveSkill(string skillName)
         {
-            throw new NotImplementedException();
+            return skillBase.RemoveSkill(skillName);
         }
 
         public IEnumerable<Skill> GetAllSkills()
         {
-            throw new NotImplementedException();
+            return skillBase.GetAllSkills();
         }
 
-        public Skill GetSkill(string skillName)
+        public IEnumerable<Skill> GetSkill(string skillName)
         {
-            throw new NotImplementedException();
+            return skillBase.GetSkill(skillName);
         }
 
         public string UpdateSkillDescription(string skillName, string newDiscription)
         {
-            throw new NotImplementedException();
+            return skillBase.UpdateSkillDescription(skillName, newDiscription);
         }
 
         public string UpdateSkillName(string oldName, string newName)
         {
-            throw new NotImplementedException();
+            return skillBase.UpdateSkillName(oldName, newName);
         }
     }
 }

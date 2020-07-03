@@ -9,9 +9,6 @@ namespace SummerPractice.BLL
 {
     interface IUserLogic
     {
-        string CreateUser(string login, string password);
-        string DeleteUser(string login);
-        IEnumerable<User> GetAllUsers();
-        string AddSkillToUser(string skillName, string login);
+        string CreateUser(User user);
     }
 }

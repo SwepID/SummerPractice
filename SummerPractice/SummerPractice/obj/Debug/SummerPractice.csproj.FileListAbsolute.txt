@@ -88,3 +88,6 @@ C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\Sum
 C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\SummerPractice.Entities.dll
 C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\SummerPractice.BLL.pdb
 C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\SummerPractice.Entities.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\SummerPractice.DAL.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\SummerPractice.DAL.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice\bin\SummerPractice.DAL.dll.config
