@@ -21,9 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerPractice.Entities", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerPractice.PL", "SummerPractice.PL\SummerPractice.PL.csproj", "{11025DCC-E65E-4211-89DE-58EA0EA54EA2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database creation script", "Database creation script", "{8FBCBEDD-5A31-4F52-8A0C-4A559B476E0A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database creation script", "Database creation script", "{689B6417-0818-45DB-B859-87BA2A0D2D69}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Desktop\UserSkills.sql = ..\..\..\..\Desktop\UserSkills.sql
+		Database creation script\Database.sql = Database creation script\Database.sql
 	EndProjectSection
 EndProject
 Global
