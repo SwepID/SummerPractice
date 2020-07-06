@@ -1,6 +1,0 @@
-C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.Entities\bin\Debug\SummerPractice.Entities.dll
-C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.Entities\bin\Debug\SummerPractice.Entities.pdb
-C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.Entities\obj\Debug\SummerPractice.Entities.csprojAssemblyReference.cache
-C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.Entities\obj\Debug\SummerPractice.Entities.csproj.CoreCompileInputs.cache
-C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.Entities\obj\Debug\SummerPractice.Entities.dll
-C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\SummerPractice.Entities\obj\Debug\SummerPractice.Entities.pdb

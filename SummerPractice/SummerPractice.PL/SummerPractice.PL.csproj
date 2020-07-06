@@ -50,13 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SummerPractice.BLL\SummerPractice.BLL.csproj">
-      <Project>{a6c825c7-b9df-49b7-80d4-e9140a5f5a8b}</Project>
-      <Name>SummerPractice.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SummerPractice.Entities\SummerPractice.Entities.csproj">
-      <Project>{ff0c376b-f952-42c1-b8e0-cb82467fb3a6}</Project>
-      <Name>SummerPractice.Entities</Name>
+    <ProjectReference Include="..\SummerPractice\SummerPractice.csproj">
+      <Project>{ef26bd09-738f-496e-aa7a-c501cdc5f9a2}</Project>
+      <Name>SummerPractice</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

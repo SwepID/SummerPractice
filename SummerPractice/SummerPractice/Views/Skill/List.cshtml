@@ -1,0 +1,35 @@
+﻿@using System.Collections
+@using SummerPractice.Models
+@model SummerPractice.Models.SkillModel
+
+<h1>Список навыков</h1>
+<form action="/Skill/SortByName" method="post">
+    <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px 0 10px 0">Сортировать по названию</button>
+</form>
+<table class="table">
+    <tbody>
+        <tr>
+            <th style="border-top:none">Название навыка</th>
+            <th style="border-top:none">Описание навыка</th>
+        </tr>
+        @foreach (var skill in (IEnumerable<Skill>)@ViewData["Skills"])
+        {
+            <tr>
+                <th scope="row">@skill.SkillName</th>
+                <td>@skill.Description</td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <form action="/Skill/RemoveSkill" method="post">
+                                <input type="hidden" name="SkillName" value="@skill.SkillName">
+                                <button class="btn btn-danger" type="submit" id="@skill.SkillName" name="@skill.SkillName">
+                                    Удалить
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

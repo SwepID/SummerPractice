@@ -1,0 +1,42 @@
+﻿@using System.Collections
+@using SummerPractice.Models
+@model SummerPractice.Models.SkillModel
+@{
+    ViewBag.Title = "Редактор навыков";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p>Редактор навыков</p>
+<div class="bg-info clearfix" style="padding: 0 0 10px 10px">
+    <h1 class="h1 bottom-left">Products</h1>
+    <div class="row">
+        <div class="col-md-4">
+
+            <form class="menu" action="/Skill/AddSkill" method="post">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationSummary(true)
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SkillName)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationSummary(true)
+                    @Html.EditorFor(model => model.SkillName)
+                    @Html.ValidationMessageFor(model => model.SkillName, "", new { @class = "text-danger" })
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px">Добавить</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
