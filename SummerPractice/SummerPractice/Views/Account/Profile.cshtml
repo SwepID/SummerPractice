@@ -1,0 +1,41 @@
+﻿@model SummerPractice.Models.User
+@{
+    ViewBag.Title = "Управление";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Изменение параметров учетной записи</h4>
+    <hr />
+    <p>Логин: @Model.Login</p>
+    <p>Пароль: @Html.ActionLink("Смена пароля", "ChangePassword")</p>
+    <h3>Список навыков пользователя</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th style="border-top:none">Название навыка</th>
+                <th style="border-top:none">Описание навыка</th>
+            </tr>
+            @foreach (var skill in Model.SkillList)
+            {
+                <tr>
+                    <th scope="row">@skill.SkillName</th>
+                    <td>@skill.Description</td>
+                    <td>
+                        <div class="row">
+                            <div> 
+                                @Html.ActionLink("Удалить", "RemoveSkill", "Skill",
+                               new { skillId = @skill.Id }, new { @class = "action-link delete" })
+
+                                @Html.ActionLink("Редактировать", "UpdateSkillName", "Skill",
+                               new { skillId = @skill.Id }, new { @class = "action-link edit" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

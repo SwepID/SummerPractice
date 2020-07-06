@@ -35,4 +35,10 @@ namespace SummerPractice.Models
         [Required]
         public string Sname { get; set; }
     }
+    public class IndexViewModel
+    {
+        public bool HasPassword { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool BrowserRemembered { get; set; }
+    }
 }

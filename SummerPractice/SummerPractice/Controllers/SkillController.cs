@@ -29,19 +29,32 @@ namespace SummerPractice.Controllers
             SkillModel skillModel = new SkillModel();
             if (ModelState.IsValid)
             {
-                Solution.skillCollection.Append(new Skill() { SkillName = skillName, Description = description });
+                if (Solution.skillCollection.Count() != 0)
+                {
+                    var skillId = Solution.skillCollection.Max(Skill => Skill.Id) + 1;
+                    Solution.skillCollection.Append(new Skill() { Id = skillId, SkillName = skillName, Description = description });
+                }
+                else
+                {
+                    Solution.skillCollection.Append(new Skill() { Id = 1, SkillName = skillName, Description = description });
+                }
                 skillModel.AddSkill(new Skill() { SkillName = skillName, Description = description });
                 return RedirectToAction("List");
             }
             ViewData.Add(new KeyValuePair<string, object>("Навыки", Solution.skillCollection));
             return View("List");
         }
-        public ActionResult RemoveSkill(string skillName)
+        public ActionResult RemoveSkill(int skillId)
         {
             ViewBag.Title = "Навыки";
             SkillModel skillModel = new SkillModel();
-            Solution.skillCollection = Solution.skillCollection.Where(element => element.SkillName != skillName);
-            Solution.result = skillModel.RemoveSkill(skillName);
+            Solution.skillCollection = Solution.skillCollection.Where(element => element.Id != skillId);
+            Solution.result = skillModel.RemoveSkill(skillId);
+            return RedirectToAction("List");
+        }
+        public ActionResult UpdateSkillName()
+        {
+
             return RedirectToAction("List");
         }
         public ActionResult SortByName()

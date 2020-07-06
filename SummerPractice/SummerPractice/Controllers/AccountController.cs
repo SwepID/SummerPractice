@@ -10,6 +10,7 @@ namespace SummerPractice.Controllers
 {
     public class AccountController : Controller
     {
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -23,7 +24,7 @@ namespace SummerPractice.Controllers
             {
                 // поиск пользователя в бд
                 User user = null;
-                using (UserContext db = new UserContext())
+                using (Context db = new Context())
                 {
                     user = db.Users.FirstOrDefault(u => u.Login == model.Name && u.Password == model.Password);
 
@@ -53,14 +54,14 @@ namespace SummerPractice.Controllers
             if (ModelState.IsValid)
             {
                 User user = null;
-                using (UserContext db = new UserContext())
+                using (Context db = new Context())
                 {
                     user = db.Users.FirstOrDefault(u => u.Login == model.Name);
                 }
                 if (user == null)
                 {
                     // создаем нового пользователя
-                    using (UserContext db = new UserContext())
+                    using (Context db = new Context())
                     {
                         db.Users.Add(new User { Login = model.Name, Password = model.Password, Fname = model.Fname, Sname = model.Sname });
                         db.SaveChanges();
@@ -82,10 +83,26 @@ namespace SummerPractice.Controllers
 
             return View(model);
         }
-        public ActionResult Logoff()
+        public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        [Authorize]
+        public ActionResult Profile()
+        {
+            User user = new UserModel().GetUserByLogin(User.Identity.Name);
+            user.SkillList = new SkillModel().GetAllSkills();
+            ViewData["user"] = user;
+            return View(user);
+        }
+        public ActionResult SearchProfile()
+        {
+            string search = Request.Form["search"];
+            ViewBag.Title = "Результаты поиска по запросу " + $"\"{search}\"";
+            ViewData["User"] = new UserModel().GetUserByLogin(search);
+            return View();
         }
     }
 }

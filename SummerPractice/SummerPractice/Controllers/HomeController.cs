@@ -10,14 +10,9 @@ namespace SummerPractice.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public ActionResult Index()
         {
-            string result = "Вы не авторизованы";
-            if (User.Identity.IsAuthenticated)
-            {
-                result = "Ваш логин: " + User.Identity.Name;
-            }
-            return result;
+            return View();
         }
         [Authorize]
         public ActionResult About()
@@ -33,5 +28,6 @@ namespace SummerPractice.Controllers
 
             return View();
         }
+
     }
 }

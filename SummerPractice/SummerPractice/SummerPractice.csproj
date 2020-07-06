@@ -127,21 +127,21 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="DAL\Encryption.cs" />
     <Compile Include="DAL\ISkillBase.cs" />
-    <Compile Include="DAL\IUserBase.cs" />
     <Compile Include="DAL\SkillBase.cs" />
-    <Compile Include="DAL\UserBase.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
+    <Compile Include="DAL\UserBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserContext.cs" />
+    <Compile Include="Models\Context.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SkillModel.cs" />
   </ItemGroup>
@@ -185,6 +185,7 @@
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

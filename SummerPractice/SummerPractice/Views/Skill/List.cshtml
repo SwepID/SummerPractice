@@ -19,15 +19,16 @@
                 <td>@skill.Description</td>
                 <td>
                     <div class="row">
-                        <div class="col-sm-3">
-                            <form action="/Skill/RemoveSkill" method="post">
-                                <input type="hidden" name="SkillName" value="@skill.SkillName">
-                                <button class="btn btn-danger" type="submit" id="@skill.SkillName" name="@skill.SkillName">
-                                    Удалить
-                                </button>
-                            </form>
+                        <div>
+                            @{
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    @Html.ActionLink("Удалить", "RemoveSkill", "Skill", new { skillId = @skill.Id }, new {@class = "action-link delete" })
+                                    @Html.ActionLink("Редактировать", "UpdateSkillName", "Skill", new { skillId = @skill.Id }, new {@class = "action-link edit" })
+                                }
+                            }
                         </div>
-                    </div>
+                        </div>
                 </td>
             </tr>
         }

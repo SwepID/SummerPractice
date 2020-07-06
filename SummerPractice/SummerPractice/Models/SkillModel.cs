@@ -11,7 +11,7 @@ namespace SummerPractice.Models
     {
         public string SkillName { get; set; }
         public string Description { get; set; }
-        public SkillModel(string skillName, string description) : base(skillName, description)
+        public SkillModel(int id, string skillName, string description, IEnumerable<User> users) : base(id, skillName, description, users )
         {
 
         }
@@ -27,9 +27,9 @@ namespace SummerPractice.Models
             return skillBase.AddSkill(skill);
         }
 
-        public string RemoveSkill(string skillName)
+        public string RemoveSkill(int skillId)
         {
-            return skillBase.RemoveSkill(skillName);
+            return skillBase.RemoveSkill(skillId);
         }
 
         public IEnumerable<Skill> GetAllSkills()

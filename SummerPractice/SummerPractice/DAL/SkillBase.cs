@@ -11,7 +11,7 @@ namespace SummerPractice.DAL
 {
     public class SkillBase : ISkillBase
     {
-        string connectionString = "Data Source=DESKTOP-LJEFIBE\\SQLEXPRESS;Initial Catalog=UserSkills;Integrated Security=True";
+        string connectionString = "Data Source=DESKTOP-LJEFIBE\\SQLEXPRESS;Initial Catalog=FormsAuth;Integrated Security=True";
 
         public string AddSkill(Skill skill)
         {
@@ -35,7 +35,7 @@ namespace SummerPractice.DAL
             }
         }
 
-        public string RemoveSkill(string skillName)
+        public string RemoveSkill(int skillId)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -45,7 +45,7 @@ namespace SummerPractice.DAL
                     SqlCommand command = connection.CreateCommand();
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "RemoveSkill";
-                    command.Parameters.Add("@skillName", SqlDbType.VarChar).Value = skillName;
+                    command.Parameters.Add("@id", SqlDbType.Int).Value = skillId;
                     var rowCount = command.ExecuteNonQuery();
                     return "Навык успешно удален. Строк удалено = " + rowCount;
                 }
@@ -71,7 +71,7 @@ namespace SummerPractice.DAL
                 {
                     while (dataReader.Read())
                     {
-                        listSkills.Add(new Skill() { SkillName = (string)dataReader["skillName"], Description = (string)dataReader["description"] });
+                        listSkills.Add(new Skill() { Id = (int)dataReader["Id"], SkillName = (string)dataReader["skillName"], Description = (string)dataReader["description"] });
                     }
                 }
 

@@ -4,30 +4,31 @@
 @{
     ViewBag.Title = "Поиск навыка по названию.";
 }
-<table class="table">
-    <tbody>
-        <tr>
-            <th style="border-top:none">Название навыка</th>
-            <th style="border-top:none">Описание навыка</th>
-        </tr>
-        @foreach (var skill in (List<Skill>)@ViewData["SearchResults"])
-        {
+    <table class="table">
+        <tbody>
             <tr>
-                <th scope="row">@skill.SkillName</th>
-                <td>@skill.Description</td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <form action="/Skill/RemoveSkill" method="post">
-                                <input type="hidden" name="skillName" value="@skill.SkillName">
-                                <button class="btn btn-danger" type="submit" id="@skill.SkillName" name="@skill.SkillName">
-                                    Удалить
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
+                <th style="border-top:none">Название навыка</th>
+                <th style="border-top:none">Описание навыка</th>
             </tr>
-        }
-    </tbody>
-</table>
+            @foreach (var skill in (IEnumerable<Skill>)@ViewData["SearchResults"])
+            {
+                <tr>
+                    <th scope="row">@skill.SkillName</th>
+                    <td>@skill.Description</td>
+                    <td>
+                        <div class="row">
+                            <div>
+                                @{
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        @Html.ActionLink("Удалить", "RemoveSkill", "Skill", new { skillId = @skill.Id }, new { @class = "action-link delete" })
+                                        @Html.ActionLink("Редактировать", "UpdateSkillName", "Skill", new { skillId = @skill.Id }, new { @class = "action-link edit" })
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

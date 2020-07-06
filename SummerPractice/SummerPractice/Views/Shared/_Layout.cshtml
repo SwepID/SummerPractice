@@ -21,9 +21,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                     <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Редактор", "Edit", "Home")</li>
+                    <li>@Html.ActionLink("Просмотр навыков", "List", "Skill")</li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink($"Здравствуйте {User.Identity.Name}!", "Profile", "Account")</li>
+                            <li>@Html.ActionLink("Выход из профиля", "Logout", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+                        }
+                    }
+                    <li>
+                        <form action="/Skill/FindSkill" method="post" style="margin: 7px;">
+                            <input type="text" name="search" placeholder="Введите название навыка" style="padding: 5px;" />
+                            <input type="submit" name="" value="Найти" />
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
