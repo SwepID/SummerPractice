@@ -49,3 +49,10 @@ textarea {
 .action-link.edit:hover{
     background-color:#cccc00;
 }
+.action-link.add {
+    background-color: #1a981a;
+    border: 1px solid #00dd00;
+}
+.action-link.add:hover {
+    background-color: #2ba92b;
+}

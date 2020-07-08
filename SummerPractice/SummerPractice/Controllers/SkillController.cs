@@ -73,6 +73,5 @@ namespace SummerPractice.Controllers
             ViewData["SearchResults"] = skillModel.GetSkill(search);    
             return View("SearchResults");
         }
-
     }
 }

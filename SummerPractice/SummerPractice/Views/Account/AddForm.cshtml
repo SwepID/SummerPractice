@@ -1,0 +1,30 @@
+﻿@model SummerPractice.Models.Skill
+@{
+    ViewBag.Title = "Добавление навыков пользователю";
+}
+    <form action="/Account/AddSkill" method="post">
+        <input type="hidden" name="userId" value="@ViewData["userId"]" />
+        <h2>Добавление навыков пользователю</h2>
+        <div class="form-horizontal">
+            <h4>Добавление навыков</h4>
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-md-2">Название навыка</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SkillName, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Описание навыка</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Добавить" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>

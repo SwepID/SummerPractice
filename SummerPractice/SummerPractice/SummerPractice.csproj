@@ -125,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="DAL\Encryption.cs" />
+    <Compile Include="Encryption\Encryption.cs" />
     <Compile Include="DAL\ISkillBase.cs" />
     <Compile Include="DAL\SkillBase.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -186,6 +186,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\AddForm.cshtml" />
+    <Content Include="Views\Account\UpdateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

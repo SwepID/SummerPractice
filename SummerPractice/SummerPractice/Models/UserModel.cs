@@ -26,5 +26,9 @@ namespace SummerPractice.Models
         {
             return userBase.GetAllUsers();
         }
+        public User GetUserById(int idUser)
+        {
+            return userBase.GetUserById(idUser);
+        }
     }
 }

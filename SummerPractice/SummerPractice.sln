@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerPractice", "SummerPra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database creation script", "Database creation script", "{689B6417-0818-45DB-B859-87BA2A0D2D69}"
 	ProjectSection(SolutionItems) = preProject
-		Database creation script\Database.sql = Database creation script\Database.sql
+		..\..\..\..\Desktop\database.sql = ..\..\..\..\Desktop\database.sql
 	EndProjectSection
 EndProject
 Global

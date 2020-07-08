@@ -9,12 +9,14 @@ namespace SummerPractice.DAL
 {
     interface ISkillBase
     {
-        string AddSkill(Skill skill);
+        int AddSkill(Skill skill);
         string RemoveSkill(int skillId);
         string UpdateSkillDescription(string skillName, string newDescription);
         string UpdateSkillName(string oldName, string newName);
+        Skill GetSkill(int skillId);
         IEnumerable<Skill> GetSkill(string skillName);
         IEnumerable<Skill> GetAllSkills();
         IEnumerable<Skill> SortByName();
+        string AddSkillToUser(Skill skill, User user);
     }
 }

@@ -14,23 +14,11 @@
         </tr>
         @foreach (var skill in (IEnumerable<Skill>)@ViewData["Skills"])
         {
-            <tr>
-                <th scope="row">@skill.SkillName</th>
-                <td>@skill.Description</td>
-                <td>
-                    <div class="row">
-                        <div>
-                            @{
-                                if (User.Identity.IsAuthenticated)
-                                {
-                                    @Html.ActionLink("Удалить", "RemoveSkill", "Skill", new { skillId = @skill.Id }, new {@class = "action-link delete" })
-                                    @Html.ActionLink("Редактировать", "UpdateSkillName", "Skill", new { skillId = @skill.Id }, new {@class = "action-link edit" })
-                                }
-                            }
-                        </div>
-                        </div>
-                </td>
-            </tr>
+    <tr>
+        <th scope="row">@skill.SkillName</th>
+        <td>@skill.Description</td>
+        
+    </tr>
         }
     </tbody>
 </table>

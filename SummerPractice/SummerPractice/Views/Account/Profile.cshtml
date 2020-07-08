@@ -11,7 +11,17 @@
     <hr />
     <p>Логин: @Model.Login</p>
     <p>Пароль: @Html.ActionLink("Смена пароля", "ChangePassword")</p>
-    <h3>Список навыков пользователя</h3>
+    <p>Имя: @Model.Fname</p>
+    <p>Фамилия: @Model.Sname</p>
+    <h3>
+        Список навыков пользователя
+        @Html.ActionLink("Добавить", "AddForm", "Account",
+            new { userId = Model.Id }, new { @class = "action-link add" })
+    </h3>
+    <form action="/Account/FindSkillInProfile" method="get" style="margin: 7px;">
+        <input type="text" name="skillName" placeholder="Введите название навыка" style="padding: 5px;" />
+        <input type="submit" name="" value="Найти" />
+    </form>
     <table class="table">
         <tbody>
             <tr>
@@ -25,12 +35,12 @@
                     <td>@skill.Description</td>
                     <td>
                         <div class="row">
-                            <div> 
-                                @Html.ActionLink("Удалить", "RemoveSkill", "Skill",
+                            <div>
+                                @Html.ActionLink("Удалить", "RemoveSkill", "Account",
                                new { skillId = @skill.Id }, new { @class = "action-link delete" })
 
-                                @Html.ActionLink("Редактировать", "UpdateSkillName", "Skill",
-                               new { skillId = @skill.Id }, new { @class = "action-link edit" })
+                                @Html.ActionLink("Редактировать", "UpdateForm", "Account",
+                               new { skillId = @skill.Id, userId = Model.Id }, new { @class = "action-link edit" })
                             </div>
                         </div>
                     </td>

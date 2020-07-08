@@ -22,21 +22,37 @@ namespace SummerPractice.Models
         }
 
         SummerPractice.DAL.SkillBase skillBase = new DAL.SkillBase();
-        public string AddSkill(Skill skill)
+        public int AddSkill(Skill skill)
         {
             return skillBase.AddSkill(skill);
+        }
+        public string AddSkillToUser(Skill skill, User user)
+        {
+            return skillBase.AddSkillToUser(skill, user);
         }
 
         public string RemoveSkill(int skillId)
         {
             return skillBase.RemoveSkill(skillId);
         }
+        public string RemoveSkillFromUser(int skillId, int userId)
+        {
+            return skillBase.RemoveSkillFromUser(skillId, userId);
+        }
 
         public IEnumerable<Skill> GetAllSkills()
         {
             return skillBase.GetAllSkills();
         }
+        public IEnumerable<Skill> GetUserSkills(User user)
+        {
+            return skillBase.GetUserSkills(user);
+        }
 
+        public Skill GetSkill(int skillId)
+        {
+            return skillBase.GetSkill(skillId);
+        }
         public IEnumerable<Skill> GetSkill(string skillName)
         {
             return skillBase.GetSkill(skillName);
@@ -45,6 +61,10 @@ namespace SummerPractice.Models
         public string UpdateSkillDescription(string skillName, string newDiscription)
         {
             return skillBase.UpdateSkillDescription(skillName, newDiscription);
+        }
+        public string UpdateSkill(int skillId, string skillName, string description)
+        {
+            return skillBase.UpdateSkill(skillId, skillName, description);
         }
 
         public string UpdateSkillName(string oldName, string newName)

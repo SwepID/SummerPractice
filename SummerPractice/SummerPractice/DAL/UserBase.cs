@@ -10,7 +10,7 @@ namespace SummerPractice.DAL
 {
     public class UserBase
     {
-        string connectionString = "Data Source=DESKTOP-LJEFIBE\\SQLEXPRESS;Initial Catalog=FormsAuth;Integrated Security=True";
+        string connectionString = "Data Source=DESKTOP-LJEFIBE\\SQLEXPRESS;Initial Catalog=FormsAuth1;Integrated Security=True";
 
         public User GetUserByLogin(string login)
         {
@@ -50,6 +50,27 @@ namespace SummerPractice.DAL
                         users.Add(new User() { Id = (int)dataReader["Id"], Login = (string)dataReader["Login"], Fname = (string)dataReader["Fname"], Sname = (string)dataReader["Sname"], Password = (string)dataReader["Password"], SkillList = null });
                     }
                     return users;
+                }
+
+            }
+        }
+        public User GetUserById(int idUser)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                User user = null;
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetUserById";
+                command.Parameters.Add("@idUser", SqlDbType.Int).Value = idUser;
+                using (SqlDataReader dataReader = command.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        user = new User() { Id = (int)dataReader["Id"], Login = (string)dataReader["Login"], Fname = (string)dataReader["Fname"], Sname = (string)dataReader["Sname"], Password = (string)dataReader["Password"], SkillList = null };
+                    }
+                    return user;
                 }
 
             }
