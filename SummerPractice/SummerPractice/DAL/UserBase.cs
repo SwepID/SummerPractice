@@ -75,5 +75,50 @@ namespace SummerPractice.DAL
 
             }
         }
+        public string EditUserInfo(int idUser, string fname, string sname)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                try
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "EditUserInfo";
+                    command.Parameters.Add("@idUser", SqlDbType.Int).Value = idUser;
+                    command.Parameters.Add("@fname", SqlDbType.VarChar).Value = fname;
+                    command.Parameters.Add("@sname", SqlDbType.VarChar).Value = sname;
+                    var rowCount = command.ExecuteNonQuery();
+                    return "Информация о пользователе успешно изменена. Строк изменено = " + rowCount;
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine(exception.Message);
+                    return exception.StackTrace;
+                }
+            }
+        }
+        public string ChangePassword(int idUser, string password)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                try
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "ChangePassword";
+                    command.Parameters.Add("@idUser", SqlDbType.Int).Value = idUser;
+                    command.Parameters.Add("@newPass", SqlDbType.VarChar).Value = password;
+                    var rowCount = command.ExecuteNonQuery();
+                    return "Пароль успешно изменен. Строк изменено = " + rowCount;
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine(exception.Message);
+                    return exception.StackTrace;
+                }
+            }
+        }
     }
 }

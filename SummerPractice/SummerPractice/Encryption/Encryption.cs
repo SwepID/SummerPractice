@@ -11,9 +11,16 @@ namespace SummerPractice.Encryption
     {
         public static string GetHash(string plaintext)
         {
-            var sha = new SHA1Managed();
-            byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(plaintext));
-            return Convert.ToBase64String(hash);
+            if (plaintext == null)
+            {
+                return "";
+            }
+            else
+            {
+                var sha = new SHA1Managed();
+                byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(plaintext));
+                return Convert.ToBase64String(hash);
+            }
         }
         public static bool CompareHash(string basePassword, string password)
         {

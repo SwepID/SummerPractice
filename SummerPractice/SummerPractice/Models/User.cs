@@ -17,6 +17,7 @@ namespace SummerPractice.Models
         string sname;
         string password;
         IEnumerable<Skill> skillList;
+        
 
         public User(string login, string fname, string sname, string password, IEnumerable<Skill> skills)
         {
@@ -33,10 +34,16 @@ namespace SummerPractice.Models
         }
         [Key]
         public int Id { get => id; set => id = value; }
+        [Required]
         public string Login { get => login; set => login = value; }
+        [Required]
         public string Fname { get => fname; set => fname = value; }
+        [Required]
         public string Sname { get => sname; set => sname = value; }
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get => password; set => password = value; }
         public IEnumerable<Skill> SkillList{get => skillList; set => skillList = value; }
+        
     }
 }

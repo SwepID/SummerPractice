@@ -188,6 +188,8 @@
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\AddForm.cshtml" />
     <Content Include="Views\Account\UpdateForm.cshtml" />
+    <Content Include="Views\Account\EditAccountInfo.cshtml" />
+    <Content Include="Views\Account\ChangePassForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

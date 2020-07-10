@@ -35,6 +35,20 @@ namespace SummerPractice.Models
         [Required]
         public string Sname { get; set; }
     }
+    public class ChangePassModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        public string ConfirmPassword { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

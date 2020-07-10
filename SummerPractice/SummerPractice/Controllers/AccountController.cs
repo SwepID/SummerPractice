@@ -44,7 +44,7 @@ namespace SummerPractice.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
+                    ModelState.AddModelError("", "Пользователя с таким логином и паролем нет!");
                 }
             }
 
@@ -169,6 +169,55 @@ namespace SummerPractice.Controllers
             }
             return RedirectToAction("Profile");
         }
+        [Authorize]
+        public ActionResult EditAccountInfo(int userId, User user)
+        {
+            ViewData["userId"] = userId;
+            System.Diagnostics.Debug.WriteLine(userId);
+            return View(user);
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditAccountInfo(int userId, string fname, string sname)
+        {
+            User user = new UserModel().GetUserByLogin(User.Identity.Name);
+            if (userId == user.Id)
+            {
+                UserModel userModel = new UserModel();
+                userModel.EditUserInfo(userId, fname, sname);
+            }
 
+        return RedirectToAction("Profile");
+        }
+        public ActionResult ChangePassForm(int userId)
+        {
+            ViewData["userId"] = userId;
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassForm(ChangePassModel model, int userId)
+        {
+            User user = new UserModel().GetUserByLogin(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                if (userId == user.Id)
+                {
+                    if (user.Password == Encryption.Encryption.GetHash(model.OldPassword))
+                    {
+                        UserModel userModel = new UserModel();
+                        userModel.ChangePassword(user.Id, Encryption.Encryption.GetHash(model.Password));
+                        ViewBag.Message = "Пароль успешно изменен!";
+                        return RedirectToAction("Profile");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Неверно указан старый пароль!");
+                    }
+                }
+            }
+            return View(model);
+        }
     }
 }

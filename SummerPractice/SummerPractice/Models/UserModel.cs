@@ -30,5 +30,13 @@ namespace SummerPractice.Models
         {
             return userBase.GetUserById(idUser);
         }
+        public string EditUserInfo(int idUser, string fname, string sname)
+        {
+            return userBase.EditUserInfo(idUser, fname, sname);
+        }
+        public string ChangePassword(int idUser, string password)
+        {
+            return userBase.ChangePassword(idUser, password);
+        }
     }
 }

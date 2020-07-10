@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\BLL",
-    "\\SummerPractice"
+    "\\SummerPractice",
+    "\\SummerPractice\\SummerPractice",
+    "\\SummerPractice\\SummerPractice\\Encryption"
   ],
-  "SelectedNode": "\\SummerPractice\\SummerPractice.PL",
+  "SelectedNode": "\\SummerPractice\\SummerPractice\\Encryption\\Encryption.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -10,7 +10,9 @@
     <h4>Изменение параметров учетной записи</h4>
     <hr />
     <p>Логин: @Model.Login</p>
-    <p>Пароль: @Html.ActionLink("Смена пароля", "ChangePassword")</p>
+    <p>Пароль: @Html.ActionLink("Смена пароля", "ChangePassForm", new { userId = Model.Id })</p>
+    <hr />
+    <h4>Пользовательские данные @Html.ActionLink("Редактировать", "EditAccountInfo", new { userId = Model.Id })</h4>
     <p>Имя: @Model.Fname</p>
     <p>Фамилия: @Model.Sname</p>
     <h3>
