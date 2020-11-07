@@ -1,4 +1,6 @@
-﻿using SummerPractice.Models;
+﻿using BLL;
+using Entities;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,47 +11,55 @@ namespace SummerPractice.Controllers
 {
     public class SkillController : System.Web.Mvc.Controller
     {
-        public static class Solution
+        ISkillRepo skillRepo;
+        IUserRepo userRepo;
+        IEncryption encryptionRepo;
+
+        //DO TO move to ninject
+        public SkillController()
         {
-            public static string result = "";
-            public static IEnumerable<Skill> skillCollection = new SkillModel().GetAllSkills();
+            IKernel ninjectKernel = new StandardKernel();
+            ninjectKernel.Bind<IUserRepo>().To<UserRepo>();
+            ninjectKernel.Bind<ISkillRepo>().To<SkillRepo>();
+            ninjectKernel.Bind<IEncryption>().To<Encryption>();
+            skillRepo = ninjectKernel.Get<ISkillRepo>();
+            userRepo = ninjectKernel.Get<IUserRepo>();
+            encryptionRepo = ninjectKernel.Get<IEncryption>();
         }
+
         public ViewResult List()
         {
             ViewBag.Title = "Skills";
-            ViewData["Result"] = Solution.result;
-            Solution.skillCollection = new SkillModel().GetAllSkills();
-            ViewData["Skills"] = Solution.skillCollection;
+            IEnumerable<Skill> skillCollection = skillRepo.GetAllSkills();
+            ViewData["Skills"] = skillCollection;
             return View();
         }
         [HttpPost]
         public ActionResult AddSkill(string skillName, string description)
         {
             ViewBag.Title = "Список навыков";
-            SkillModel skillModel = new SkillModel();
+            IEnumerable<Skill> skillCollection = skillRepo.GetAllSkills();
             if (ModelState.IsValid)
             {
-                if (Solution.skillCollection.Count() != 0)
+                if (skillCollection.Count() != 0)
                 {
-                    var skillId = Solution.skillCollection.Max(Skill => Skill.Id) + 1;
-                    Solution.skillCollection.Append(new Skill() { Id = skillId, SkillName = skillName, Description = description });
+                    var skillId = skillCollection.Max(Skill => Skill.Id) + 1;
+                    skillCollection.Append(new Skill() { Id = skillId, SkillName = skillName, Description = description });
                 }
                 else
                 {
-                    Solution.skillCollection.Append(new Skill() { Id = 1, SkillName = skillName, Description = description });
+                    skillCollection.Append(new Skill() { Id = 1, SkillName = skillName, Description = description });
                 }
-                skillModel.AddSkill(new Skill() { SkillName = skillName, Description = description });
+                skillRepo.AddSkill(new Skill() { SkillName = skillName, Description = description });
                 return RedirectToAction("List");
             }
-            ViewData.Add(new KeyValuePair<string, object>("Навыки", Solution.skillCollection));
+            ViewData.Add(new KeyValuePair<string, object>("Навыки", skillCollection));
             return View("List");
         }
         public ActionResult RemoveSkill(int skillId)
         {
             ViewBag.Title = "Навыки";
-            SkillModel skillModel = new SkillModel();
-            Solution.skillCollection = Solution.skillCollection.Where(element => element.Id != skillId);
-            Solution.result = skillModel.RemoveSkill(skillId);
+            skillRepo.RemoveSkill(skillId);
             return RedirectToAction("List");
         }
         public ActionResult UpdateSkillName()
@@ -59,18 +69,16 @@ namespace SummerPractice.Controllers
         }
         public ActionResult SortByName()
         {
-            SkillModel skillModel = new SkillModel();
             ViewBag.Title = "Список отсортированных навыков";
-            Solution.skillCollection = skillModel.SortByName();
-            ViewData["Skills"] = Solution.skillCollection;
+            IEnumerable<Skill> skillCollection = skillRepo.SortByName();
+            ViewData["Skills"] = skillCollection;
             return View("List");
         }
         public ActionResult FindSkill()
         {
             string search = Request.Form["search"];
             ViewBag.Title = "Результаты поиска по запросу " + $"\"{search}\"";
-            SkillModel skillModel = new SkillModel();
-            ViewData["SearchResults"] = skillModel.GetSkill(search);    
+            ViewData["SearchResults"] = skillRepo.GetSkill(search);    
             return View("SearchResults");
         }
     }

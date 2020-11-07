@@ -1,0 +1,5 @@
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\Entities\bin\Debug\Entities.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\Entities\bin\Debug\Entities.pdb
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\Entities\obj\Debug\Entities.dll
+C:\Users\bnkha\source\repos\SummerPractice\SummerPractice\Entities\obj\Debug\Entities.pdb

@@ -1,32 +1,31 @@
-﻿@model SummerPractice.Models.LoginModel
-
+﻿@using Entities
+@model Entities.Login
 @{
     ViewBag.Title = "Login";
 }
 
 <h2>Вход на сайт</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>LoginModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Name">Name</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                <input class="form-control text-box single-line" id="Name" name="Name" type="text" value="">
+
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Password">Password</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <input class="form-control text-box single-line password" id="Password" name="Password" type="password">
+
             </div>
         </div>
 

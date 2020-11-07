@@ -1,6 +1,5 @@
 ﻿@using System.Collections
-@using SummerPractice.Models
-@model SummerPractice.Models.SkillModel
+@model Entities.Skill
 
 <h1>Список навыков</h1>
 <form action="/Skill/SortByName" method="post">
@@ -12,7 +11,7 @@
             <th style="border-top:none">Название навыка</th>
             <th style="border-top:none">Описание навыка</th>
         </tr>
-        @foreach (var skill in (IEnumerable<Skill>)@ViewData["Skills"])
+        @foreach (var skill in (IEnumerable<Entities.Skill>)@ViewData["Skills"])
         {
     <tr>
         <th scope="row">@skill.SkillName</th>

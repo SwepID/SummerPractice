@@ -1,5 +1,6 @@
-﻿using SummerPractice.DAL;
-using SummerPractice.Models;
+﻿using BLL;
+using Entities;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,24 @@ using System.Web.Security;
 
 namespace SummerPractice.Controllers
 {
-    public static class Solution
-    {
-        public static string result = "";
-        public static IEnumerable<Skill> skillCollection = new SkillModel().GetAllSkills();
-    }
     public class AccountController : Controller
     {
+        ISkillRepo skillRepo;
+        IUserRepo userRepo;
+        IEncryption encryptionRepo;
+
+        //DO TO move to ninject
+        public AccountController(ISkillRepo skillRepository, IUserRepo userRepository, IEncryption encryptionRepository)
+        {
+            /*IKernel ninjectKernel = new StandardKernel(new NinjectRegistrations());
+            skillRepo = ninjectKernel.Get<ISkillLogic>();
+            userRepo = ninjectKernel.Get<IUserLogic>();
+            encryptionRepo = ninjectKernel.Get<IEncryption>();*/
+            skillRepo = skillRepository;
+            userRepo = userRepository;
+            encryptionRepo = encryptionRepository;
+        }
+
 
         [HttpGet]
         public ActionResult Login()
@@ -25,21 +37,19 @@ namespace SummerPractice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(Login loginEntity)
         {
+            
             if (ModelState.IsValid)
             {
                 // поиск пользователя в бд
                 User user = null;
-                using (Context db = new Context())
-                {
-                    string hashPass = SummerPractice.Encryption.Encryption.GetHash(model.Password);
-                    user = db.Users.FirstOrDefault(u => u.Login == model.Name && u.Password == hashPass);
-                }
+                string hashPass = encryptionRepo.GetHash(loginEntity.Password);
+                user = userRepo.GetAllUsers().FirstOrDefault(u => u.Login == loginEntity.Name && u.Password == hashPass);
+                
                 if (user != null)
                 {
-                    Solution.skillCollection = new SkillModel().GetUserSkills(user);
-                    FormsAuthentication.SetAuthCookie(model.Name, true);
+                    FormsAuthentication.SetAuthCookie(user.Login, true);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -48,7 +58,7 @@ namespace SummerPractice.Controllers
                 }
             }
 
-            return View(model);
+            return View(loginEntity);
         }
 
         public ActionResult Register()
@@ -57,29 +67,22 @@ namespace SummerPractice.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(Register registerEntity)
         {
             if (ModelState.IsValid)
             {
                 User user = null;
-                using (Context db = new Context())
-                {
-                    user = db.Users.FirstOrDefault(u => u.Login == model.Name);
-                }
+                user = userRepo.GetAllUsers().FirstOrDefault(u => u.Login == registerEntity.Name);
+                
                 if (user == null)
                 {
-                    // создаем нового пользователя
-                    using (Context db = new Context())
-                    {
-                        db.Users.Add(new User { Login = model.Name, Password = SummerPractice.Encryption.Encryption.GetHash(model.Password), Fname = model.Fname, Sname = model.Sname });
-                        db.SaveChanges();
-                        string hashPass = SummerPractice.Encryption.Encryption.GetHash(model.Password);
-                        user = db.Users.Where(u => u.Login == model.Name && u.Password == hashPass).FirstOrDefault();
-                    }
-                    // если пользователь удачно добавлен в бд
+                    userRepo.AddUser(new User { Login = registerEntity.Name, Password = encryptionRepo.GetHash(registerEntity.Password), Fname = registerEntity.Fname, Sname = registerEntity.Sname });
+                    string hashPass = encryptionRepo.GetHash(registerEntity.Password);
+                    user = userRepo.GetAllUsers().Where(u => u.Login == registerEntity.Name && u.Password == hashPass).FirstOrDefault();
+                    
                     if (user != null)
                     {
-                        FormsAuthentication.SetAuthCookie(model.Name, true);
+                        FormsAuthentication.SetAuthCookie(registerEntity.Name, true);
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -89,7 +92,7 @@ namespace SummerPractice.Controllers
                 }
             }
 
-            return View(model);
+            return View(registerEntity);
         }
         public ActionResult Logout()
         {
@@ -100,15 +103,15 @@ namespace SummerPractice.Controllers
         [Authorize]
         public ActionResult Profile()
         {
-            User user = new UserModel().GetUserByLogin(User.Identity.Name);
-            user.SkillList = new SkillModel().GetUserSkills(user);
+            User user = userRepo.GetUserByLogin(User.Identity.Name);
+            user.SkillList = skillRepo.GetUserSkills(user);
             ViewData["user"] = user;
             return View(user);
         }
         public ActionResult FindSkillInProfile(string skillName)
         {
-            User user = new UserModel().GetUserByLogin(User.Identity.Name);
-            user.SkillList = new SkillModel().GetUserSkills(user).Where(el => el.SkillName == skillName);
+            User user = userRepo.GetUserByLogin(User.Identity.Name);
+            user.SkillList = skillRepo.GetUserSkills(user).Where(el => el.SkillName == skillName);
             ViewData["user"] = user;
             return View("Profile", user);
         }
@@ -116,56 +119,54 @@ namespace SummerPractice.Controllers
         {
             string search = Request.Form["search"];
             ViewBag.Title = "Результаты поиска по запросу " + $"\"{search}\"";
-            ViewData["User"] = new UserModel().GetUserByLogin(search);
+            ViewData["User"] = userRepo.GetUserByLogin(search);
             return View();
         }
         [Authorize]
-        public ActionResult UpdateForm(int skillId, int userId, SkillModel skillModel)
+        public ActionResult UpdateForm(int skillId, int userId)
         {
             ViewData["userId"] = userId;
             ViewData["skillId"] = skillId;
-            return View(skillModel);
+            return View(new Skill());
         }
         [Authorize]
         [HttpPost]
         public ActionResult UpdateSkill(int skillId, string skillName, string Description)
         {
-            User user = new UserModel().GetUserByLogin(User.Identity.Name);
-            SkillModel skillModel = new SkillModel();
-            Solution.skillCollection = skillModel.GetUserSkills(user);
-            if (Solution.skillCollection.Where(element => element.Id == skillId).Count() != 0)
+            User user = userRepo.GetUserByLogin(User.Identity.Name);
+            IEnumerable<Skill> skillCollection = skillRepo.GetUserSkills(user);
+            if (skillCollection.Where(element => element.Id == skillId).Count() != 0)
             {
-                skillModel.UpdateSkill(skillId, skillName, Description);
+                skillRepo.UpdateSkill(skillId, skillName, Description);
             }
             return RedirectToAction("Profile");
         }
         [Authorize]
-        public ActionResult AddForm(int userId, SkillModel skillModel)
+        public ActionResult AddForm(int userId, Skill skill)
         {
             ViewData["userId"] = userId;
 
-            return View(skillModel);
+            return View(skill);
         }
         [Authorize]
         [HttpPost]
         public ActionResult AddSkill(string skillName, string Description, int userId)
         {
-            User user = new UserModel().GetUserById(userId);
+            User user = userRepo.GetUserById(userId);
             Skill skill = new Skill() { SkillName = skillName, Description = Description };
-            new SkillModel().AddSkillToUser(skill, user);
+            skillRepo.AddSkillToUser(skill, user);
             return RedirectToAction("Profile");
         }
         [Authorize]
         public ActionResult RemoveSkill(int skillId)
         {
-            User user = new UserModel().GetUserByLogin(User.Identity.Name);
+            User user = userRepo.GetUserByLogin(User.Identity.Name);
             ViewBag.Title = "Навыки";
-            SkillModel skillModel = new SkillModel();
-            Solution.skillCollection = skillModel.GetUserSkills(user);
-            if (Solution.skillCollection.Where(element => element.Id == skillId).Count() != 0)
+            IEnumerable<Skill> skillCollection = skillRepo.GetUserSkills(user);
+            if (skillCollection.Where(element => element.Id == skillId).Count() != 0)
             {
-                skillModel.RemoveSkill(skillId);
-                Solution.skillCollection = Solution.skillCollection.Where(element => element.Id != skillId);
+                skillRepo.RemoveSkill(skillId);
+                skillCollection = skillCollection.Where(element => element.Id != skillId);
             }
             return RedirectToAction("Profile");
         }
@@ -180,11 +181,10 @@ namespace SummerPractice.Controllers
         [HttpPost]
         public ActionResult EditAccountInfo(int userId, string fname, string sname)
         {
-            User user = new UserModel().GetUserByLogin(User.Identity.Name);
+            User user = userRepo.GetUserByLogin(User.Identity.Name);
             if (userId == user.Id)
             {
-                UserModel userModel = new UserModel();
-                userModel.EditUserInfo(userId, fname, sname);
+                userRepo.EditUserInfo(userId, fname, sname);
             }
 
         return RedirectToAction("Profile");
@@ -197,17 +197,16 @@ namespace SummerPractice.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassForm(ChangePassModel model, int userId)
+        public ActionResult ChangePassForm(ChangePass changePassEntity, int userId)
         {
-            User user = new UserModel().GetUserByLogin(User.Identity.Name);
+            User user = userRepo.GetUserByLogin(User.Identity.Name);
             if (ModelState.IsValid)
             {
                 if (userId == user.Id)
                 {
-                    if (user.Password == Encryption.Encryption.GetHash(model.OldPassword))
+                    if (user.Password == encryptionRepo.GetHash(changePassEntity.OldPassword))
                     {
-                        UserModel userModel = new UserModel();
-                        userModel.ChangePassword(user.Id, Encryption.Encryption.GetHash(model.Password));
+                        userRepo.ChangePassword(user.Id, encryptionRepo.GetHash(changePassEntity.Password));
                         ViewBag.Message = "Пароль успешно изменен!";
                         return RedirectToAction("Profile");
                     }
@@ -217,7 +216,7 @@ namespace SummerPractice.Controllers
                     }
                 }
             }
-            return View(model);
+            return View(changePassEntity);
         }
     }
 }
