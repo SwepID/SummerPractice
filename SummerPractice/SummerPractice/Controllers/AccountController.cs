@@ -19,10 +19,6 @@ namespace SummerPractice.Controllers
         //DO TO move to ninject
         public AccountController(ISkillRepo skillRepository, IUserRepo userRepository, IEncryption encryptionRepository)
         {
-            /*IKernel ninjectKernel = new StandardKernel(new NinjectRegistrations());
-            skillRepo = ninjectKernel.Get<ISkillLogic>();
-            userRepo = ninjectKernel.Get<IUserLogic>();
-            encryptionRepo = ninjectKernel.Get<IEncryption>();*/
             skillRepo = skillRepository;
             userRepo = userRepository;
             encryptionRepo = encryptionRepository;

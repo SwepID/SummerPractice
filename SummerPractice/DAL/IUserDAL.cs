@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    interface IUserDAL
+    public interface IUserDAL
     {
         int AddUser(User user);
         User GetUserByLogin(string login);

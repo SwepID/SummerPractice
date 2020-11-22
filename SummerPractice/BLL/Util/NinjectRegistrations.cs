@@ -1,4 +1,5 @@
 ﻿using BLL;
+using DAL;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace BLL.Util
             Bind<ISkillRepo>().To<SkillRepo>();
             Bind<IUserRepo>().To<UserRepo>();
             Bind<IEncryption>().To<Encryption>();
+            Bind<IUserDAL>().To<UserDao>();
+            Bind<ISkillDAL>().To<SkillDao>();
         }
     }
 }

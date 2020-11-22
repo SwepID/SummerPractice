@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using DAL;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,64 +10,64 @@ namespace BLL
 {
     public class SkillRepo : ISkillRepo
     {
-        public SkillRepo()
+        ISkillDAL skillRepository;
+        public SkillRepo(ISkillDAL skillRepo)
         {
-
+            skillRepository = skillRepo;
         }
 
-        DAL.SkillDao skillDao = new DAL.SkillDao();
         public int AddSkill(Skill skill)
         {
-            return skillDao.AddSkill(skill);
+            return skillRepository.AddSkill(skill);
         }
         public string AddSkillToUser(Skill skill, User user)
         {
-            return skillDao.AddSkillToUser(skill, user);
+            return skillRepository.AddSkillToUser(skill, user);
         }
 
         public string RemoveSkill(int skillId)
         {
-            return skillDao.RemoveSkill(skillId);
+            return skillRepository.RemoveSkill(skillId);
         }
         public string RemoveSkillFromUser(int skillId, int userId)
         {
-            return skillDao.RemoveSkillFromUser(skillId, userId);
+            return skillRepository.RemoveSkillFromUser(skillId, userId);
         }
 
         public IEnumerable<Skill> GetAllSkills()
         {
-            return skillDao.GetAllSkills();
+            return skillRepository.GetAllSkills();
         }
         public IEnumerable<Skill> GetUserSkills(User user)
         {
-            return skillDao.GetUserSkills(user);
+            return skillRepository.GetUserSkills(user);
         }
 
         public Skill GetSkill(int skillId)
         {
-            return skillDao.GetSkill(skillId);
+            return skillRepository.GetSkill(skillId);
         }
         public IEnumerable<Skill> GetSkill(string skillName)
         {
-            return skillDao.GetSkill(skillName);
+            return skillRepository.GetSkill(skillName);
         }
 
         public string UpdateSkillDescription(string skillName, string newDiscription)
         {
-            return skillDao.UpdateSkillDescription(skillName, newDiscription);
+            return skillRepository.UpdateSkillDescription(skillName, newDiscription);
         }
         public string UpdateSkill(int skillId, string skillName, string description)
         {
-            return skillDao.UpdateSkill(skillId, skillName, description);
+            return skillRepository.UpdateSkill(skillId, skillName, description);
         }
 
         public string UpdateSkillName(string oldName, string newName)
         {
-            return skillDao.UpdateSkillName(oldName, newName);
+            return skillRepository.UpdateSkillName(oldName, newName);
         }
         public IEnumerable<Skill> SortByName()
         {
-            return skillDao.SortByName();
+            return skillRepository.SortByName();
         }
     }
 }

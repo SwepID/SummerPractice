@@ -81,6 +81,7 @@ namespace DAL
                 }
             }
         }
+
         public string RemoveSkillFromUser(int skillId, int userId)
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))

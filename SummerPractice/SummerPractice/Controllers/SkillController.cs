@@ -16,15 +16,11 @@ namespace SummerPractice.Controllers
         IEncryption encryptionRepo;
 
         //DO TO move to ninject
-        public SkillController()
+        public SkillController(ISkillRepo skillRepository, IUserRepo userRepository, IEncryption encryptionRepository)
         {
-            IKernel ninjectKernel = new StandardKernel();
-            ninjectKernel.Bind<IUserRepo>().To<UserRepo>();
-            ninjectKernel.Bind<ISkillRepo>().To<SkillRepo>();
-            ninjectKernel.Bind<IEncryption>().To<Encryption>();
-            skillRepo = ninjectKernel.Get<ISkillRepo>();
-            userRepo = ninjectKernel.Get<IUserRepo>();
-            encryptionRepo = ninjectKernel.Get<IEncryption>();
+            skillRepo = skillRepository;
+            userRepo = userRepository;
+            encryptionRepo = encryptionRepository;
         }
 
         public ViewResult List()

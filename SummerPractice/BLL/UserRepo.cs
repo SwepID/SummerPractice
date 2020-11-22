@@ -9,36 +9,36 @@ namespace BLL
 {
     public class UserRepo : IUserRepo
     {
-        public UserRepo()
+        IUserDAL userDAL;
+        public UserRepo(IUserDAL userD)
         {
-
+            userDAL = userD;
         }
-        UserDao userBase = new UserDao();
 
         public User GetUserByLogin(string login)
         {
-            return userBase.GetUserByLogin(login);
+            return userDAL.GetUserByLogin(login);
         }
         public IEnumerable<User> GetAllUsers()
         {
-            return userBase.GetAllUsers();
+            return userDAL.GetAllUsers();
         }
         public User GetUserById(int idUser)
         {
-            return userBase.GetUserById(idUser);
+            return userDAL.GetUserById(idUser);
         }
         public string EditUserInfo(int idUser, string fname, string sname)
         {
-            return userBase.EditUserInfo(idUser, fname, sname);
+            return userDAL.EditUserInfo(idUser, fname, sname);
         }
         public string ChangePassword(int idUser, string password)
         {
-            return userBase.ChangePassword(idUser, password);
+            return userDAL.ChangePassword(idUser, password);
         }
 
         public int AddUser(User user)
         {
-            return userBase.AddUser(user);
+            return userDAL.AddUser(user);
         }
     }
 }
