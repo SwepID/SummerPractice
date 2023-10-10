@@ -33,6 +33,7 @@ namespace SummerPractice.Controllers
         [HttpPost]
         public ActionResult AddSkill(string skillName, string description)
         {
+            //тест
             ViewBag.Title = "Список навыков";
             IEnumerable<Skill> skillCollection = skillRepo.GetAllSkills();
             if (ModelState.IsValid)
